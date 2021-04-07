@@ -17,7 +17,9 @@
 
         data() {
             return {
-                color: "red",
+                correctAnswers: 0,
+                wrongAnswers: 0,
+                selectedAnswers: [],
                 index: 0,
                 quizList: [
                     {
@@ -46,6 +48,15 @@
                             {value: "MVC", correct: true},
                             {value: "SVP", correct: false}
                         ]
+                    },
+                     {
+                        question: "Ed io sono...",
+                        answers: [
+                            {value: "Cap America", correct: false},
+                            {value: "Iron Man", correct: true},
+                            {value: "Posaman", correct: false},
+                            {value: "Magally", correct: false}
+                        ]
                     }
                 ]
             }  
@@ -59,7 +70,16 @@
             answerResult(i){
                 let answers = document.querySelectorAll('#answer');
                 if ((this.quizList[this.index].answers[i].correct === true)){
+                    this.correctAnswers++;
                     answers[i].style.backgroundColor = "green";
+                    for(let y=0; y < answers.length; y++){
+                        if(y !== i) {
+                            answers[y].style.display = "none";
+                        }
+                    }
+                } else {
+                    this.wrongAnswers--;
+                    answers[i].style.display = "red";
                 }
             }
         },
