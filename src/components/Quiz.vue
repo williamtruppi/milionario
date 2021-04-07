@@ -5,7 +5,7 @@
         </div>
         <div class="answers">
             <div class="answer-box"  v-for="(quiz, i) in quizList[index].answers" :key="i">
-                <h2>{{quiz.value}}</h2>
+                <h2 id="answer" @click="answerResult(i)">{{quiz.value}}</h2>
             </div>
         </div>
     </div>
@@ -54,14 +54,19 @@
         methods: {
             randomQuestion() {
                 this.index = Math.floor(Math.random() * (this.quizList.length));
+            },
+
+            answerResult(i){
+                let answers = document.querySelectorAll('#answer');
+                if ((this.quizList[this.index].answers[i].correct === true)){
+                    answers[i].style.backgroundColor = "green";
+                }
             }
         },
 
         mounted() {
             /* console.log(this.quizList); */
             this.randomQuestion();
-            console.log(this.index); 
-            console.log(this.quizList[this.index].question);
         }
         
     }
@@ -70,6 +75,9 @@
 
 
 <style scoped lang="scss">
+
+    .right-answer{background-color: green;}
+    .wrong-answer{background-color: red;}
 
     .quiz{
         color: white;
@@ -101,14 +109,11 @@
                     width: fit-content;
                     border: 1px solid white;
                     padding: 1% 8%;
+                    cursor: pointer;
                 }
             }
            
         }
-    }
-
-    
-
-    
+    } 
     
 </style>
