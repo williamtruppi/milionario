@@ -1,10 +1,12 @@
 <template>
     <div class="quiz">
-        <div class="question" style="text-align: center;">
-            <h2 v-for="quiz in quizList" :key="quiz.question">{{quiz.question}}</h2>
+        <div class="question">
+            <h2>{{this.quizList[index].question}}</h2>
         </div>
-        <div class="answers" style="display: flex; flex-wrap: wrap; text-align: center;">
-            <h2 v-for="(quiz, i) in quizList[index].answers" :key="i" style="min-width: 50%;">{{quiz.value}}</h2>
+        <div class="answers">
+            <div class="answer-box"  v-for="(quiz, i) in quizList[index].answers" :key="i">
+                <h2>{{quiz.value}}</h2>
+            </div>
         </div>
     </div>
 </template>
@@ -26,13 +28,40 @@
                             {value: "69", correct: false},
                             {value: "00", correct: false}
                         ]
+                    },
+                    {
+                        question: "Miglior giocatore di Basket",
+                        answers: [
+                            {value: "Magally", correct: false},
+                            {value: "Berlusconi", correct: false},
+                            {value: "Jordan", correct: true},
+                            {value: "Enrico Mentana", correct: false}
+                        ]
+                    },
+                    {
+                        question: "Pattern Laravel",
+                        answers: [
+                            {value: "MCC", correct: false},
+                            {value: "Cvc", correct: false},
+                            {value: "MVC", correct: true},
+                            {value: "SVP", correct: false}
+                        ]
                     }
                 ]
             }  
         },
 
+        methods: {
+            randomQuestion() {
+                this.index = Math.floor(Math.random() * (this.quizList.length));
+            }
+        },
+
         mounted() {
-            console.log(this.quizList);
+            /* console.log(this.quizList); */
+            this.randomQuestion();
+            console.log(this.index); 
+            console.log(this.quizList[this.index].question);
         }
         
     }
@@ -44,6 +73,42 @@
 
     .quiz{
         color: white;
+        background-color: #11093A;
+        padding: 2% 0;
+
+        .question{
+            display: flex;
+            justify-content: center;
+                h2{
+                    width: fit-content;
+                    border: 1px solid white;
+                    padding: 1% 8%;
+                }
+        }
+
+        .answers{
+            display: flex; 
+            flex-wrap: wrap; 
+            
+            .answer-box{
+                margin-top: 2%;
+                min-width: 50%;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+
+                h2{
+                    width: fit-content;
+                    border: 1px solid white;
+                    padding: 1% 8%;
+                }
+            }
+           
+        }
     }
+
+    
+
+    
     
 </style>
