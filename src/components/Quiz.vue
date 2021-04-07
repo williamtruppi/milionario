@@ -12,7 +12,7 @@
         <h1>{{this.correctMsg}}</h1>
 
         <div class="buttons-quiz">
-            <button>NEXT</button>
+            <button @click="nextQst()">NEXT</button>
         </div>
     </div>
 </template>
@@ -26,6 +26,7 @@
                 correctMsg: "",
                 correctAnswers: 0,
                 wrongAnswers: 0,
+                answers: [],
                 index: 0,
                 selectedQuestions: [],
                 quizList: [
@@ -76,31 +77,29 @@
 
             answerResult(i){
                 console.log("ciao");
-                let answers = document.querySelectorAll('#answer');
+                this.answers = document.querySelectorAll('#answer');
                 if ((this.quizList[this.index].answers[i].correct === true)){
                     this.correctAnswers++;
-                    answers[i].style.backgroundColor = "green";
+                    this.answers[i].style.backgroundColor = "green";
                     //disabilito il pulsante per evitare click successivi
-                    answers[i].disabled = true;
+                    this.answers[i].disabled = true;
                     //elimino le risposte residue
-                    for(let y=0; y < answers.length; y++){
+                    for(let y=0; y < this.answers.length; y++){
                         if(y !== i) {
-                            answers[y].disabled = true;
-                            answers[y].style.backgroundColor = 'red';
+                            this.answers[y].disabled = true;
+                            this.answers[y].style.backgroundColor = 'red';
                         }
                     }
                 } else {
                     this.wrongAnswers++;
-                    answers[i].style.backgroundColor = "red";
+                    this.answers[i].style.backgroundColor = "red";
                     //disabilito il pulsante per evitare click successivi
-                    answers[i].disabled = true;
+                    this.answers[i].disabled = true;
                     //elimino le risposte residue
-                    for(let j=0; j < answers.length; j++){
+                    for(let j=0; j < this.answers.length; j++){
                         if(j !== i) {
-                            answers[j].disabled = true;
-                            answers[j].style.backgroundColor = 'grey';
-                        } else {
-                            answers[i].style.backgroundColor = "green";
+                            this.answers[j].disabled = true;
+                            this.answers[j].style.backgroundColor = 'grey';
                         }
                     }
 
@@ -115,6 +114,11 @@
             },
 
             nextQst(){
+                this.answers.forEach(elem => {
+                    elem.disabled = false;
+                    elem.style.backgroundColor = 'transparent';
+                });
+                this.correctMsg = "";
                 let tempRnd = Math.floor(Math.random() * (this.quizList.length));
                 if (!(this.selectedQuestions.includes(tempRnd))){
                     this.index = tempRnd;
