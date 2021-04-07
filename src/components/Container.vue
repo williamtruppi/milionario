@@ -1,3 +1,19 @@
 <template>
-    <h1>ciao a tutti</h1>
+    <div class="top-banner">
+        <img src="../assets/milionario.png" alt="" id="logomil">
+    </div>
 </template>
+
+<style scoped lang="scss">
+
+    .top-banner{
+        background-color: #15178B;
+        text-align: center;
+
+        #logomil{
+            height: 200px;
+            margin: 2% 0;
+        }
+    }
+    
+</style>
