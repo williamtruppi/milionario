@@ -157,10 +157,12 @@
 <style scoped lang="scss">
 
     .quiz{
+        height: calc(100% - 250px);
         color: white;
         background-color: #11093A;
         padding: 2% 0;
         text-align: center;
+        display: none;
 
         .question{
             display: flex;

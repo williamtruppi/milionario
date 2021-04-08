@@ -9,6 +9,7 @@
     .top-banner{
         background-color: #15178B;
         text-align: center;
+        height: 250px;
 
         #logomil{
             height: 200px;

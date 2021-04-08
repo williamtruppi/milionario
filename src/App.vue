@@ -13,5 +13,6 @@
     #app {
       font-family: Avenir, Helvetica, Arial, sans-serif;
       background-color: #11093A;
+      height: 100vh;
     }
 </style>
