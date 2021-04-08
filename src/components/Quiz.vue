@@ -115,19 +115,26 @@
 
             nextQst(){
                 
+                // se le lunghezze dei due array sono diverse, eseguo il codice
                 if (this.selectedQuestions.length !== this.quizList.length){
+
+                    // genero un numero casuale finché questo non è diverso rispetto a quello presente nella dom già fatte
                     let tempRnd = 0;
                     do {
                         tempRnd = Math.floor(Math.random() * (this.quizList.length));
                     } while (this.selectedQuestions.includes(tempRnd));
+
+                    //passo id domanda univoca al suo array e la stampo a schermo
                     this.index = tempRnd;
                     this.selectedQuestions.push(this.index);
 
+                    //riabilito pulsanti e rendo trasparenti gli sfondi
                     this.answers.forEach(elem => {
                         elem.disabled = false;
                         elem.style.backgroundColor = 'transparent';
                     });
-                    
+
+                    //resetto il messaggio di errore
                     this.correctMsg = "";
                 }
 
