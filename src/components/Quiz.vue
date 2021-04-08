@@ -119,10 +119,19 @@
                     elem.style.backgroundColor = 'transparent';
                 });
                 this.correctMsg = "";
-                let tempRnd = Math.floor(Math.random() * (this.quizList.length));
-                if (!(this.selectedQuestions.includes(tempRnd))){
-                    this.index = tempRnd;
-                }
+
+                let tempRnd = 0;
+                
+                do {
+                    tempRnd = Math.floor(Math.random() * (this.quizList.length));
+                } while (this.selectedQuestions.includes(tempRnd));
+
+                this.index = tempRnd;
+                this.selectedQuestions.push(this.index);
+            
+                console.log(this.selectedQuestions);
+                console.log("Risposte corrette " + this.correctAnswers);
+                console.log("Risposte sbagliate " + this.wrongAnswers);
             }
         },
 
