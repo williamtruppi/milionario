@@ -114,21 +114,23 @@
             },
 
             nextQst(){
-                this.answers.forEach(elem => {
-                    elem.disabled = false;
-                    elem.style.backgroundColor = 'transparent';
-                });
-                this.correctMsg = "";
-
-                let tempRnd = 0;
                 
-                do {
-                    tempRnd = Math.floor(Math.random() * (this.quizList.length));
-                } while (this.selectedQuestions.includes(tempRnd));
+                if (this.selectedQuestions.length !== this.quizList.length){
+                    let tempRnd = 0;
+                    do {
+                        tempRnd = Math.floor(Math.random() * (this.quizList.length));
+                    } while (this.selectedQuestions.includes(tempRnd));
+                    this.index = tempRnd;
+                    this.selectedQuestions.push(this.index);
 
-                this.index = tempRnd;
-                this.selectedQuestions.push(this.index);
-            
+                    this.answers.forEach(elem => {
+                        elem.disabled = false;
+                        elem.style.backgroundColor = 'transparent';
+                    });
+                    
+                    this.correctMsg = "";
+                }
+
                 console.log(this.selectedQuestions);
                 console.log("Risposte corrette " + this.correctAnswers);
                 console.log("Risposte sbagliate " + this.wrongAnswers);
