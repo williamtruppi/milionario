@@ -3,6 +3,7 @@
      <Container />
      <Welcome />
      <Quiz />
+     <Endgame />
   </div>
 </template>
 
@@ -11,6 +12,7 @@
 import Container from "@/components/Container.vue";
 import Quiz from "@/components/Quiz.vue";
 import Welcome from '../components/Welcome.vue';
+import Endgame from "@/components/Endgame.vue";
 
 export default {
   name: "Home",
@@ -18,6 +20,7 @@ export default {
     Container,
     Quiz,
     Welcome,
+    Endgame
   },
 };
 </script>

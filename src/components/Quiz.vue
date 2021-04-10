@@ -19,13 +19,16 @@
 
 <script>
 
-    export default {
+    import {eventBus} from "../main";
 
+    export default {
+        
         data() {
             return {
                 correctMsg: "",
                 correctAnswers: 0,
                 wrongAnswers: 0,
+                choiceClicked: false,
                 answers: [],
                 index: 0,
                 selectedQuestions: [],
@@ -76,7 +79,7 @@
             },
 
             answerResult(i){
-                console.log("ciao");
+            
                 this.answers = document.querySelectorAll('#answer');
                 if ((this.quizList[this.index].answers[i].correct === true)){
                     this.correctAnswers++;
@@ -109,14 +112,16 @@
                             this.correctMsg = "La risposta corretta è " + elem.value;
                         }
                     });
-                    
                 }
+
+                this.choiceClicked = true;
+                console.log(this.choiceClicked);
             },
 
             nextQst(){
                 
                 // se le lunghezze dei due array sono diverse, eseguo il codice
-                if (this.selectedQuestions.length !== this.quizList.length){
+                if (this.selectedQuestions.length !== this.quizList.length && this.choiceClicked){
 
                     // genero un numero casuale finché questo non è diverso rispetto a quello presente nella dom già fatte
                     let tempRnd = 0;
@@ -138,6 +143,10 @@
                     this.correctMsg = "";
                 }
 
+                eventBus.$emit('eventCorrectAnswers', this.correctAnswers);
+                eventBus.$emit('eventWrongAnswers', this.wrongAnswers);
+                this.choiceClicked = false;
+                console.log(this.choiceClicked);
                 console.log(this.selectedQuestions);
                 console.log("Risposte corrette " + this.correctAnswers);
                 console.log("Risposte sbagliate " + this.wrongAnswers);
