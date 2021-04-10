@@ -141,10 +141,13 @@
 
                     //resetto il messaggio di errore
                     this.correctMsg = "";
+                } else {
+                    document.querySelector(".quiz").style.display = "none";
+                    document.querySelector(".endgame").style.display = "flex";
+                    eventBus.$emit('eventCorrectAnswers', this.correctAnswers);
+                    eventBus.$emit('eventWrongAnswers', this.wrongAnswers);
                 }
-
-                eventBus.$emit('eventCorrectAnswers', this.correctAnswers);
-                eventBus.$emit('eventWrongAnswers', this.wrongAnswers);
+                
                 this.choiceClicked = false;
                 console.log(this.choiceClicked);
                 console.log(this.selectedQuestions);

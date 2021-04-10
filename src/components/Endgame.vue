@@ -1,7 +1,7 @@
 <template>
     <div class="endgame">
-        <div v-if="fromCorrect" class="mt-3 alert alert-secondary" >Risposte corrette: {{fromCorrect}}</div>
-        <div v-if="fromWrong" class="mt-3 alert alert-secondary" >Risposte sbagliate: {{fromWrong}}</div>
+        <h1 v-if="fromCorrect">Risposte corrette: {{fromCorrect}}</h1>
+        <h1 v-if="fromWrong">Risposte sbagliate: {{fromWrong}}</h1>
     </div>
 </template>
 
@@ -27,3 +27,18 @@
         }
     };
 </script>
+
+<style lang="scss" scoped>
+        .endgame{
+            height: calc(100% - 250px);
+            display: none;
+            color: white;
+            align-items: center;
+            justify-content: space-around;
+            flex-direction: column;
+
+            h1{
+                width: fit-content;
+            }
+        }
+</style>
