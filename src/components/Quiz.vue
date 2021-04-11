@@ -5,11 +5,13 @@
         </div>
         <div class="answers">
             <div class="answer-box"  v-for="(quiz, i) in quizList[index].answers" :key="i">
+                <hr>
                 <button id="answer" @click="answerResult(i)">{{quiz.value}}</button>
+                <hr>
             </div>
         </div>
 
-        <h1>{{this.correctMsg}}</h1>
+        <h1 id="msg">{{this.correctMsg}}</h1>
 
         <div class="buttons-quiz">
             <button id="next" @click="nextQst()">NEXT</button>
@@ -196,15 +198,20 @@
                 text-align: center;
                 display: flex;
                 justify-content: center;
+                align-items: center;
+
+                hr{width: 30%}
 
                 #answer{
                     background-color: transparent;
                     width: fit-content;
                     color: white;
                     border: 1px solid white;
-                    padding: 1% 8%;
+                    padding: 3% 20%;
                     cursor: pointer;
+                    font-size: 110%;
                 }
+
             }
            
         }
@@ -214,10 +221,25 @@
 
 
     @media screen and (max-width: 600px) {
-        .answer-box {
-            width: 100%;
-            margin-bottom: 10%;
+
+        .quiz{
+            padding: 0 3%;
+
+            #msg{
+                font-size: 130%;
+                margin-bottom: 15px;
+            }
+
+            .question{
+                margin: 5% 0;
+            }
+
+            .answer-box {
+                width: 100%;
+                margin-bottom: 10%;
+            }
         }
+
     }
     
 </style>
