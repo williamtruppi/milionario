@@ -16,7 +16,7 @@
         methods: {
 
             startGame() {
-                document.querySelector('.quiz').style.display = "block";
+                document.querySelector('.quiz').style.display = "flex";
                 document.querySelector('.welcome').style.display = 'none';
             }
         }

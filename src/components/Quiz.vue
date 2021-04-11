@@ -12,7 +12,7 @@
         <h1>{{this.correctMsg}}</h1>
 
         <div class="buttons-quiz">
-            <button @click="nextQst()">NEXT</button>
+            <button id="next" @click="nextQst()">NEXT</button>
         </div>
     </div>
 </template>
@@ -28,7 +28,7 @@
                 correctMsg: "",
                 correctAnswers: 0,
                 wrongAnswers: 0,
-                choiceClicked: false,
+                nextBtn: '',
                 answers: [],
                 index: 0,
                 selectedQuestions: [],
@@ -114,14 +114,14 @@
                     });
                 }
 
-                this.choiceClicked = true;
-                console.log(this.choiceClicked);
+                
+                this.nextBtn.style.display = 'block';
             },
 
             nextQst(){
                 
                 // se le lunghezze dei due array sono diverse, eseguo il codice
-                if (this.selectedQuestions.length !== this.quizList.length && this.choiceClicked){
+                if (this.selectedQuestions.length !== this.quizList.length){
 
                     // genero un numero casuale finché questo non è diverso rispetto a quello presente nella dom già fatte
                     let tempRnd = 0;
@@ -144,19 +144,18 @@
                 } else {
                     document.querySelector(".quiz").style.display = "none";
                     document.querySelector(".endgame").style.display = "flex";
+
+                    // assegno all'event bus le due proprietà che desidero passare al componente figlio
                     eventBus.$emit('eventCorrectAnswers', this.correctAnswers);
                     eventBus.$emit('eventWrongAnswers', this.wrongAnswers);
                 }
                 
-                this.choiceClicked = false;
-                console.log(this.choiceClicked);
-                console.log(this.selectedQuestions);
-                console.log("Risposte corrette " + this.correctAnswers);
-                console.log("Risposte sbagliate " + this.wrongAnswers);
+                this.nextBtn.style.display = 'none';
             }
         },
 
         mounted() {
+            this.nextBtn = document.querySelector(".buttons-quiz");
             this.randomQuestion();
             this.selectedQuestions.push(this.index);
         }
@@ -175,6 +174,7 @@
         padding: 2% 0;
         text-align: center;
         display: none;
+        flex-direction: column;
 
         .question{
             display: flex;
@@ -208,6 +208,16 @@
             }
            
         }
+
+        .buttons-quiz{display: none;}
     } 
+
+
+    @media screen and (max-width: 600px) {
+        .answer-box {
+            width: 100%;
+            margin-bottom: 10%;
+        }
+    }
     
 </style>
